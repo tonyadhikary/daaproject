@@ -7,9 +7,6 @@
 #define MAX_IP_LEN 16
 #define HASH_TABLE_SIZE 1024
 
-/* ==========================================
-   1. DATA STRUCTURE DEFINITIONS
-   ========================================== */
 
 // Aho-Corasick Trie Node
 typedef struct TrieNode {
@@ -43,10 +40,6 @@ typedef struct HashTable {
     HashNode* buckets[HASH_TABLE_SIZE];
 } HashTable;
 
-
-/* ==========================================
-   2. BEHAVIORAL TRACKING & HASH TABLE
-   ========================================== */
 
 SlidingWindow* create_sliding_window() {
     SlidingWindow* window = (SlidingWindow*)malloc(sizeof(SlidingWindow));
@@ -113,9 +106,6 @@ SlidingWindow* get_or_create_ip_record(HashTable* table, const char* ip) {
 }
 
 
-/* ==========================================
-   3. AHO-CORASICK AUTOMATON (SIGNATURES)
-   ========================================== */
 
 TrieNode* create_trie_node() {
     TrieNode* node = (TrieNode*)malloc(sizeof(TrieNode));
@@ -198,9 +188,8 @@ void scan_for_signatures(TrieNode* root, const char* log_payload) {
 }
 
 
-/* ==========================================
-   4. MAIN SYSTEM INGESTION ENGINE
-   ========================================== */
+
+
 
 // Process incoming log for both Exact Signatures and Behavioral Rules
 void process_log(TrieNode* root, HashTable* ip_table, long timestamp, const char* ip, const char* payload) {
